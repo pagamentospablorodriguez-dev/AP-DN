@@ -1,6 +1,15 @@
 import { AuthProvider, useAuth } from './auth';
 import { AuthPage } from './AuthPage';
 import { Dashboard } from './Dashboard';
+import { useEffect } from 'react';
+
+// 1. Defina o componente de Scroll
+function ScrollToTop() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return null;
+}
 
 function AppInner() {
   const { session, loading } = useAuth();
@@ -13,9 +22,13 @@ function AppInner() {
     );
   }
 
-  if (!session) return <AuthPage />;
-
-  return <Dashboard />;
+  // 2. Agora o componente retorna o conteúdo corretamente
+  return (
+    <>
+      <ScrollToTop />
+      {!session ? <AuthPage /> : <Dashboard />}
+    </>
+  );
 }
 
 export default function App() {
