@@ -63,8 +63,9 @@ export function Dashboard() {
       <header className="sticky top-0 z-30 border-b border-white/10 bg-ink-900/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
-              <Flame className="h-5 w-5 text-gold" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl">
+              <img src="/Bune.png" alt="Bune - The Best!" style={{ borderRadius: '10px' }} />
+
             </div>
             <div>
               <p className="font-serif text-lg font-bold leading-none text-cream">
