@@ -28,7 +28,7 @@ export function AuthPage() {
 
       <div className="relative z-10 w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gold/10">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
             <img src="/Bune.png" alt="Bune - The Best!" style={{ borderRadius: '10px' }} />
           </div>
           <h1 className="font-serif text-3xl font-bold text-cream">
