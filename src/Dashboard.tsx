@@ -1,7 +1,7 @@
 //Bune
 
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Flame,
   Check,
@@ -18,10 +18,13 @@ import {
   Zap,
   Moon,
   LogOut,
+  Sparkles,
 } from 'lucide-react';
 import { MODULES, BONUSES, type Module, type Bonus } from './content';
+import { ORDER_BUMPS, type OrderBump } from './orderBumps';
 import { useProgress } from './useProgress';
 import { useAuth } from './auth';
+import { useOrderBumps } from './useOrderBumps';
 import { ModuleViewer } from './ModuleViewer';
 
 const ICONS: Record<string, typeof Sunrise> = {
@@ -34,12 +37,61 @@ const ICONS: Record<string, typeof Sunrise> = {
   moon: Moon,
 };
 
-export function Dashboard() {
+type DashboardProps = {
+  pendingUnlock?: string | null;
+  onUnlockConsumed?: () => void;
+};
+
+export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
   const { progress, toggleComplete } = useProgress();
+  const { unlocks, unlockBump } = useOrderBumps();
   const { user, signOut } = useAuth();
-  const [activeItem, setActiveItem] = useState<{ item: Module | Bonus; isBonus: boolean } | null>(null);
+
+  const [activeItem, setActiveItem] = useState<
+    | { item: Module | Bonus; isBonus: boolean }
+    | { item: OrderBump; isOrderBump: true }
+    | null
+  >(null);
+
+  const [unlockStatus, setUnlockStatus] = useState<{
+    bumpKey: string;
+    success: boolean;
+    error?: string;
+  } | null>(null);
+
+  // Process pending unlock when user is logged in
+  useEffect(() => {
+    if (pendingUnlock && user) {
+      unlockBump(pendingUnlock).then(({ error }) => {
+        if (error) {
+          setUnlockStatus({ bumpKey: pendingUnlock, success: false, error });
+        } else {
+          setUnlockStatus({ bumpKey: pendingUnlock, success: true });
+          onUnlockConsumed?.();
+        }
+        window.scrollTo(0, 0);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingUnlock, user]);
+
+  // Scroll to top whenever activeItem changes (open/close module)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeItem]);
 
   if (activeItem) {
+    if ('isOrderBump' in activeItem) {
+      return (
+        <ModuleViewer
+          item={activeItem.item}
+          isOrderBump
+          completed={false}
+          onToggleComplete={() => {}}
+          onBack={() => setActiveItem(null)}
+        />
+      );
+    }
     return (
       <ModuleViewer
         item={activeItem.item}
@@ -68,7 +120,6 @@ export function Dashboard() {
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl">
               <img src="/Bune.png" alt="Bune - The Best!" style={{ borderRadius: '10px' }} />
-
             </div>
             <div>
               <p className="font-serif text-lg font-bold leading-none text-cream">
@@ -87,6 +138,45 @@ export function Dashboard() {
       </header>
 
       <div className="mx-auto max-w-5xl px-5 py-10">
+        {/* Unlock notification banner */}
+        {unlockStatus && (
+          <div
+            className={`mb-8 rounded-2xl border p-5 ${
+              unlockStatus.success
+                ? 'border-green-500/30 bg-green-500/10'
+                : 'border-red-500/30 bg-red-500/10'
+            }`}
+          >
+            <div className="flex items-start gap-3">
+              {unlockStatus.success ? (
+                <Check className="mt-0.5 h-5 w-5 shrink-0 text-green-400" />
+              ) : (
+                <Lock className="mt-0.5 h-5 w-5 shrink-0 text-red-400" />
+              )}
+              <div>
+                <p
+                  className={`font-semibold ${unlockStatus.success ? 'text-green-300' : 'text-red-300'}`}
+                >
+                  {unlockStatus.success
+                    ? 'Conteúdo exclusivo liberado!'
+                    : 'Não foi possível liberar o conteúdo'}
+                </p>
+                <p
+                  className={`mt-1 text-sm leading-relaxed ${
+                    unlockStatus.success ? 'text-green-200/70' : 'text-red-200/70'
+                  }`}
+                >
+                  {unlockStatus.success
+                    ? `"${
+                        ORDER_BUMPS.find((b) => b.key === unlockStatus.bumpKey)?.title ?? ''
+                      }" agora está disponível na sua área abaixo. Role a página para acessar.`
+                    : unlockStatus.error}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="mb-10">
           <h1 className="font-serif text-3xl font-bold text-cream sm:text-4xl">
             Bem-vindo, <span className="gold-text">{firstName}</span>.
@@ -122,7 +212,85 @@ export function Dashboard() {
           </p>
         </div>
 
-        <div className="mb-6 flex items-center gap-3">
+        {/* Order Bumps Section */}
+        {ORDER_BUMPS.length > 0 && (
+          <>
+            <div className="mb-6 flex items-center gap-3">
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+              <span className="flex items-center gap-1.5 font-serif text-sm italic text-gold/70">
+                <Sparkles className="h-3.5 w-3.5" /> Conteúdos Extras
+              </span>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {ORDER_BUMPS.map((b) => {
+                const Icon = ICONS[b.icon] ?? Flame;
+                const isUnlocked = !!unlocks[b.key];
+                return (
+                  <div
+                    key={b.key}
+                    className={`group relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 ${
+                      isUnlocked
+                        ? 'cursor-pointer border-gold/40 bg-gradient-to-br from-ink-800 to-ink-800/30 hover:border-gold/60'
+                        : 'border-white/10 bg-ink-800/50'
+                    }`}
+                    onClick={() => isUnlocked && setActiveItem({ item: b, isOrderBump: true })}
+                  >
+                    <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gold/5 blur-2xl" />
+                    <div className="relative flex items-start justify-between">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded-xl border ${
+                            isUnlocked
+                              ? 'border-gold/30 bg-gold/10'
+                              : 'border-white/10 bg-white/5'
+                          }`}
+                        >
+                          {isUnlocked ? (
+                            <Icon className="h-6 w-6 text-gold" />
+                          ) : (
+                            <Lock className="h-5 w-5 text-cream/30" />
+                          )}
+                        </div>
+                        <div>
+                          <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gold/60">
+                            <Sparkles className="h-3 w-3" /> {b.number}
+                          </span>
+                          <h3 className="mt-1 font-serif text-lg font-bold leading-tight text-cream">
+                            {b.title}
+                          </h3>
+                        </div>
+                      </div>
+                      {isUnlocked && (
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-green-500/20 text-green-400">
+                          <Check className="h-4 w-4" />
+                        </div>
+                      )}
+                    </div>
+                    <p className="relative mt-3 text-sm leading-relaxed text-cream/55">
+                      {b.subtitle}
+                    </p>
+                    <div className="relative mt-4 flex items-center justify-between">
+                      <span className="flex items-center gap-1.5 text-xs text-cream/40">
+                        <Clock className="h-3 w-3" /> {b.duration}
+                      </span>
+                      {isUnlocked ? (
+                        <span className="flex items-center gap-1 text-xs font-semibold text-gold transition-transform group-hover:translate-x-1">
+                          Acessar <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
+                      ) : (
+                        <span className="text-xs font-semibold text-cream/40">Bloqueado</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        <div className="mt-12 mb-6 flex items-center gap-3">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
           <span className="font-serif text-sm italic text-gold/70">Protocolo Principal</span>
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
