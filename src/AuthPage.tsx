@@ -1,8 +1,12 @@
 import { useState } from 'react';
-import { Flame, ArrowRight, Lock, Mail, Eye, EyeOff } from 'lucide-react';
+import { ArrowRight, Lock, Mail, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { useAuth } from './auth';
 
-export function AuthPage() {
+type Props = {
+  pendingUnlock?: string | null;
+};
+
+export function AuthPage({ pendingUnlock }: Props) {
   const { signIn, signUp } = useAuth();
   const [mode, setMode] = useState<'signin' | 'signup'>('signup');
   const [email, setEmail] = useState('');
@@ -21,12 +25,36 @@ export function AuthPage() {
     if (error) setError(error);
   };
 
+  const unlockLabel =
+    pendingUnlock === 'ob1'
+      ? 'Os 10 Gatilhos da Aura Magnética'
+      : pendingUnlock === 'ob2'
+        ? 'Protocolo Noite de Predador'
+        : null;
+
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-ink-900 px-5 py-10">
       <div className="absolute inset-0 grain" />
       <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/5 blur-[120px]" />
 
       <div className="relative z-10 w-full max-w-md">
+        {unlockLabel && (
+          <div className="mb-6 rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 to-transparent p-4">
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-5 w-5 shrink-0 text-gold" />
+              <div>
+                <p className="text-sm font-semibold text-cream">
+                  Conteúdo exclusivo detectado
+                </p>
+                <p className="mt-0.5 text-xs leading-relaxed text-cream/60">
+                  Você está liberando: <span className="font-semibold text-gold">{unlockLabel}</span>.
+                  Crie sua conta ou entre para ativar este conteúdo na sua área.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
             <img src="/Bune.png" alt="Bune - The Best!" style={{ borderRadius: '10px' }} />
