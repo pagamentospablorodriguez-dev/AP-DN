@@ -1,19 +1,41 @@
 import { AuthProvider, useAuth } from './auth';
 import { AuthPage } from './AuthPage';
 import { Dashboard } from './Dashboard';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+const STORAGE_KEY = 'aura_pending_unlock';
+
+function getUnlockFromURL(): string | null {
+  const params = new URLSearchParams(window.location.search);
+  const unlock = params.get('unlock');
+  if (unlock === 'ob1' || unlock === 'ob2') return unlock;
+  return null;
+}
 
 function AppInner() {
   const { session, loading } = useAuth();
+  const [pendingUnlock, setPendingUnlock] = useState<string | null>(null);
 
-  // Este useEffect será executado sempre que o valor de 'session' mudar
+  // Detect unlock param on first load and persist it
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth' // Remove 'smooth' se quiser que seja instantâneo
-    });
-  }, [session]); // <--- O segredo está aqui: observar a mudança da sessão
+    const fromURL = getUnlockFromURL();
+    if (fromURL) {
+      sessionStorage.setItem(STORAGE_KEY, fromURL);
+      setPendingUnlock(fromURL);
+      // Clean the URL so it doesn't persist on refresh/share
+      const url = new URL(window.location.href);
+      url.searchParams.delete('unlock');
+      window.history.replaceState({}, '', url.toString());
+    } else {
+      const stored = sessionStorage.getItem(STORAGE_KEY);
+      if (stored) setPendingUnlock(stored);
+    }
+  }, []);
+
+  // Scroll to top whenever session changes (login/logout)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [session]);
 
   if (loading) {
     return (
@@ -23,7 +45,17 @@ function AppInner() {
     );
   }
 
-  return !session ? <AuthPage /> : <Dashboard />;
+  return !session ? (
+    <AuthPage pendingUnlock={pendingUnlock} />
+  ) : (
+    <Dashboard
+      pendingUnlock={pendingUnlock}
+      onUnlockConsumed={() => {
+        sessionStorage.removeItem(STORAGE_KEY);
+        setPendingUnlock(null);
+      }}
+    />
+  );
 }
 
 export default function App() {
