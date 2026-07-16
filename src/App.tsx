@@ -3,16 +3,17 @@ import { AuthPage } from './AuthPage';
 import { Dashboard } from './Dashboard';
 import { useEffect } from 'react';
 
-// 1. Defina o componente de Scroll
-function ScrollToTop() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  return null;
-}
-
 function AppInner() {
   const { session, loading } = useAuth();
+
+  // Este useEffect será executado sempre que o valor de 'session' mudar
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth' // Remove 'smooth' se quiser que seja instantâneo
+    });
+  }, [session]); // <--- O segredo está aqui: observar a mudança da sessão
 
   if (loading) {
     return (
@@ -22,13 +23,7 @@ function AppInner() {
     );
   }
 
-  // 2. Agora o componente retorna o conteúdo corretamente
-  return (
-    <>
-      <ScrollToTop />
-      {!session ? <AuthPage /> : <Dashboard />}
-    </>
-  );
+  return !session ? <AuthPage /> : <Dashboard />;
 }
 
 export default function App() {
