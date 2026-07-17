@@ -145,7 +145,7 @@ export const ORDER_BUMPS: OrderBump[] = [
     icon: 'moon',
     objective:
       'Entregar o mapa completo da noite — balada, bar e encontro — para que o homem com aura entre em qualquer ambiente noturno e faça o ambiente reagir, sem depender de bebida, amigo ou sorte.',
-    checkoutUrl: 'https://pay.kiwify.com.br/checkout-placeholder-ob2',
+    checkoutUrl: 'https://pay.cakto.com.br/34atfhd',
     lessons: [
       {
         heading: 'A balada tem regras próprias',
