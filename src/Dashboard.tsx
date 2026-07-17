@@ -212,85 +212,7 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
           </p>
         </div>
 
-        {/* Order Bumps Section */}
-        {ORDER_BUMPS.length > 0 && (
-          <>
-            <div className="mb-6 flex items-center gap-3">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
-              <span className="flex items-center gap-1.5 font-serif text-sm italic text-gold/70">
-                <Sparkles className="h-3.5 w-3.5" /> Conteúdos Extras
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {ORDER_BUMPS.map((b) => {
-                const Icon = ICONS[b.icon] ?? Flame;
-                const isUnlocked = !!unlocks[b.key];
-                return (
-                  <div
-                    key={b.key}
-                    className={`group relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 ${
-                      isUnlocked
-                        ? 'cursor-pointer border-gold/40 bg-gradient-to-br from-ink-800 to-ink-800/30 hover:border-gold/60'
-                        : 'border-white/10 bg-ink-800/50'
-                    }`}
-                    onClick={() => isUnlocked && setActiveItem({ item: b, isOrderBump: true })}
-                  >
-                    <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gold/5 blur-2xl" />
-                    <div className="relative flex items-start justify-between">
-                      <div className="flex items-center gap-4">
-                        <div
-                          className={`flex h-12 w-12 items-center justify-center rounded-xl border ${
-                            isUnlocked
-                              ? 'border-gold/30 bg-gold/10'
-                              : 'border-white/10 bg-white/5'
-                          }`}
-                        >
-                          {isUnlocked ? (
-                            <Icon className="h-6 w-6 text-gold" />
-                          ) : (
-                            <Lock className="h-5 w-5 text-cream/30" />
-                          )}
-                        </div>
-                        <div>
-                          <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gold/60">
-                            <Sparkles className="h-3 w-3" /> {b.number}
-                          </span>
-                          <h3 className="mt-1 font-serif text-lg font-bold leading-tight text-cream">
-                            {b.title}
-                          </h3>
-                        </div>
-                      </div>
-                      {isUnlocked && (
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-green-500/20 text-green-400">
-                          <Check className="h-4 w-4" />
-                        </div>
-                      )}
-                    </div>
-                    <p className="relative mt-3 text-sm leading-relaxed text-cream/55">
-                      {b.subtitle}
-                    </p>
-                    <div className="relative mt-4 flex items-center justify-between">
-                      <span className="flex items-center gap-1.5 text-xs text-cream/40">
-                        <Clock className="h-3 w-3" /> {b.duration}
-                      </span>
-                      {isUnlocked ? (
-                        <span className="flex items-center gap-1 text-xs font-semibold text-gold transition-transform group-hover:translate-x-1">
-                          Acessar <ArrowRight className="h-3.5 w-3.5" />
-                        </span>
-                      ) : (
-                        <span className="text-xs font-semibold text-cream/40">Bloqueado</span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        )}
-
-        <div className="mt-12 mb-6 flex items-center gap-3">
+        <div className="mb-6 flex items-center gap-3">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
           <span className="font-serif text-sm italic text-gold/70">Protocolo Principal</span>
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
@@ -394,6 +316,90 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
             );
           })}
         </div>
+
+        {/* Order Bumps Section (below bonuses) */}
+        {ORDER_BUMPS.length > 0 && (
+          <>
+            <div className="mt-12 mb-6 flex items-center gap-3">
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+              <span className="flex items-center gap-1.5 font-serif text-sm italic text-gold/70">
+                <Sparkles className="h-3.5 w-3.5" /> Conteúdos Extras
+              </span>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {ORDER_BUMPS.map((b) => {
+                const Icon = ICONS[b.icon] ?? Flame;
+                const isUnlocked = !!unlocks[b.key];
+                return (
+                  <div
+                    key={b.key}
+                    className={`group relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 ${
+                      isUnlocked
+                        ? 'cursor-pointer border-gold/40 bg-gradient-to-br from-ink-800 to-ink-800/30 hover:border-gold/60'
+                        : 'cursor-pointer border-white/10 bg-ink-800/50 hover:border-gold/30'
+                    }`}
+                    onClick={() =>
+                      isUnlocked
+                        ? setActiveItem({ item: b, isOrderBump: true })
+                        : window.open(b.checkoutUrl, '_blank', 'noopener,noreferrer')
+                    }
+                  >
+                    <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gold/5 blur-2xl" />
+                    <div className="relative flex items-start justify-between">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded-xl border ${
+                            isUnlocked
+                              ? 'border-gold/30 bg-gold/10'
+                              : 'border-white/10 bg-white/5'
+                          }`}
+                        >
+                          {isUnlocked ? (
+                            <Icon className="h-6 w-6 text-gold" />
+                          ) : (
+                            <Lock className="h-5 w-5 text-cream/30" />
+                          )}
+                        </div>
+                        <div>
+                          <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gold/60">
+                            <Sparkles className="h-3 w-3" /> {b.number}
+                          </span>
+                          <h3 className="mt-1 font-serif text-lg font-bold leading-tight text-cream">
+                            {b.title}
+                          </h3>
+                        </div>
+                      </div>
+                      {isUnlocked && (
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-green-500/20 text-green-400">
+                          <Check className="h-4 w-4" />
+                        </div>
+                      )}
+                    </div>
+                    <p className="relative mt-3 text-sm leading-relaxed text-cream/55">
+                      {b.subtitle}
+                    </p>
+                    <div className="relative mt-4 flex items-center justify-between">
+                      <span className="flex items-center gap-1.5 text-xs text-cream/40">
+                        <Clock className="h-3 w-3" /> {b.duration}
+                      </span>
+                      {isUnlocked ? (
+                        <span className="flex items-center gap-1 text-xs font-semibold text-gold transition-transform group-hover:translate-x-1">
+                          Acessar <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-1 text-xs font-semibold text-gold transition-transform group-hover:translate-x-1">
+                          Desbloquear <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
 
         <div className="mt-14 rounded-2xl border border-white/10 bg-ink-800/50 p-6 text-center">
           <div className="mb-3 flex justify-center gap-0.5">
