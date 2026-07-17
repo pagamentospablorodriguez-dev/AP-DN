@@ -11,6 +11,7 @@ export type OrderBump = {
   duration: string;
   icon: string;
   objective: string;
+  checkoutUrl: string;
   lessons: OrderBumpLesson[];
   exercise: {
     title: string;
@@ -29,6 +30,7 @@ export const ORDER_BUMPS: OrderBump[] = [
     icon: 'eye',
     objective:
       'Entregar exatamente o que dizer nos primeiros 5 segundos após o olhar dela — transformando o "olhar dela" em "ela vir até você".',
+    checkoutUrl: 'https://pay.kiwify.com.br/checkout-placeholder-ob1',
     lessons: [
       {
         heading: 'A janela dos 5 segundos',
@@ -143,6 +145,7 @@ export const ORDER_BUMPS: OrderBump[] = [
     icon: 'moon',
     objective:
       'Entregar o mapa completo da noite — balada, bar e encontro — para que o homem com aura entre em qualquer ambiente noturno e faça o ambiente reagir, sem depender de bebida, amigo ou sorte.',
+    checkoutUrl: 'https://pay.kiwify.com.br/checkout-placeholder-ob2',
     lessons: [
       {
         heading: 'A balada tem regras próprias',
