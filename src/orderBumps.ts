@@ -77,7 +77,7 @@ export const ORDER_BUMPS: OrderBump[] = [
         body: [
           'Em vez de "você é linda" (genérico, esperado, fraco), diga algo específico: "Você tem uma presença que interrompe a sala." ou "O jeito que você se move chama atenção sem pedir."',
           'O específico comunica observação real. O genérico comunica que você diria isso para qualquer mulher. E mulheres distinguem os dois instantaneamente. O específico demonstra que você vê — não apenas olha.',
-          'A regra: cumprimente algo que ela controla (estilo, postura, energia), não algo que ela não controla (rosto, corpo). Cumprir o que ela controla valoriza a escolha dela. Cumprir o que ela não controla é genérico e preguiçoso.',
+          'A regra: cumprimente algo que ela controla (estilo, postura, energia), não algo que ela não controla (rosto, corpo). Cumprimentar o que ela controla valoriza a escolha dela. Cumprimentar o que ela não controla é genérico e preguiçoso.',
         ],
       },
       {
