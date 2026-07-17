@@ -67,7 +67,7 @@ export function AudioPlayer() {
     <div className="rounded-2xl border border-gold/30 bg-ink-900/80 p-6">
       <audio ref={audioRef} loop preload="auto">
         <source
-          src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8cb980e3a7.mp3?filename=deep-meditation-156756.mp3"
+          src="/Bune.MP3"
           type="audio/mpeg"
         />
       </audio>
