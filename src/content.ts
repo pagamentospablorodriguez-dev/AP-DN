@@ -53,7 +53,7 @@ export const MODULES: Module[] = [
           '1. Empurre o topo da cabeça para cima, como se um fio te puxasse. Alongue a espinha.',
           '2. Deixe os ombros caírem para trás e para baixo — não force, deixe cair. O peito se abre naturalmente.',
           '3. Olhe nos seus próprios olhos no espelho. Não desvie. Permaneça 30 segundos.',
-          'Esses três ajustes comunicam à sua própria mente: "eu ocomo espaço". O cérebro acredita no que o corpo demonstra. Fazer isso todo dia instala a postura predadora como padrão basal — não como ato forçado.',
+          'Esses três ajustes comunicam à sua própria mente: "eu ocupo espaço". O cérebro acredita no que o corpo demonstra. Fazer isso todo dia instala a postura predadora como padrão basal — não como ato forçado.',
         ],
       },
       {
@@ -69,7 +69,7 @@ export const MODULES: Module[] = [
       title: 'O Protocolo dos 7 Minutos',
       steps: [
         'Amanhã, ao acordar, não toque no celular pelos primeiros 7 minutos.',
-        'Faita o Scan de Expansão por 2 minutos — sinta e solte cada tensão.',
+        'Faça o Scan de Expansão por 2 minutos — sinta e solte cada tensão.',
         'Vá ao espelho e aplique a Âncora de Postura por 3 minutos.',
         'Diga mentalmente a intenção: "Hoje eu ocupo cada sala que entrar."',
         'Saia de casa sem checar mensagens. Observe como as pessoas reagem.',
@@ -103,7 +103,7 @@ export const MODULES: Module[] = [
           'Ajuste 1 — A base. Pés paralelos, na largura dos ombros. Não juntos (parece inseguro), não muito abertos (parece agressivo). O peso distribuído igualmente nos dois pés. Essa base diz: "estou aqui, não vou a lugar nenhum."',
           'Ajuste 2 — O eixo. Imagine um fio puxando o topo da cabeça para cima. A espinha alonga, o peito se abre sem forçar, o queixo fica paralelo ao chão. Não erga o queixo — isso demonstra desafio. Mantenha nivelado — isso demonstra presença.',
           'Ajuste 3 — Os ombros. Deixe cair. A maioria anda com ombros elevados de tensão acumulada. O simples ato de soltá-los para baixo muda a silhueta inteira e comunica: "estou confortável no meu corpo."',
-          'Ajuste 4 — As mãos. Não cruze os braços. Não enfaie nos bolsos. Deixe as mãos soltas ao lado do corpo ou uma sobre a outra na frente, relaxadas. Mãos soltas comunicam abertura e segurança — mãos escondidas comunicam defesa.',
+          'Ajuste 4 — As mãos. Não cruze os braços. Não enfie nos bolsos. Deixe as mãos soltas ao lado do corpo ou uma sobre a outra na frente, relaxadas. Mãos soltas comunicam abertura e segurança — mãos escondidas comunicam defesa.',
           'Ajuste 5 — O movimento. Quando andar, mova a partir do core (abdômen/lombar), não dos ombros. O homem que anda com o tronco estável e as pernas fazendo o trabalho parece sólido. O que balança o tronco parece instável.',
         ],
       },
@@ -138,7 +138,7 @@ export const MODULES: Module[] = [
     duration: '14 min',
     icon: 'eye',
     objective:
-      'Treinar o olhar para carregar presença — não ameaça, não vazio — de forma que cause um "trava" instintivo em quem recebe.',
+      'Treinar o olhar para carregar presença — não ameaça, não vazio — de forma que cause uma "trava" instintiva em quem recebe.',
     lessons: [
       {
         heading: 'O olhar é o canal mais direto da aura',
@@ -260,7 +260,7 @@ export const MODULES: Module[] = [
         body: [
           'Numa festa, num bar, num grupo — o homem com aura não precisa estar no centro da roda. Ele pode estar na borda, calado, observando. E ainda assim ser o mais notado. Por quê? Porque o silêncio dele é cheio, não vazio.',
           'O silêncio vazio é o cara no canto, tenso, mexendo no celular, evitando contato. O silêncio cheio é o cara no canto, relaxado, olhando o ambiente, confortável em não fazer nada. As mulheres distinguem os dois instantaneamente.',
-          'A regra: esteja onde está, completamente. Se está calado, esteja calado por completo. Se está ouvindo, ouça por completo. A presença total — mesmo em silêncio — é mais magnética que qualquer表演.',
+          'A regra: esteja onde está, completamente. Se está calado, esteja calado por completo. Se está ouvindo, ouça por completo. A presença total — mesmo em silêncio — é mais magnética que qualquer coisa.',
         ],
       },
     ],
@@ -268,10 +268,10 @@ export const MODULES: Module[] = [
       title: 'O Dia do Silêncio Ativo',
       steps: [
         'Escolha um dia. Nesse dia, fale 50% menos que o normal.',
-        'A cada pergunta que fizer, espere 2 segundos antes de responder à resposta.',
-        'Em grupo, permaneça em silêncio ocupado por 5 minutos — presente, observando.',
+        'A cada pergunta que fizerem, espere 2 segundos antes de responder.',
+        'Em grupo, permaneça em silêncio por 5 minutos — presente, observando.',
         'Observe: quem procurou você? Quem olhou? Quem perguntou sua opinião?',
-        'Anote o que sentiu: desconforto? Poder? Alívio?',
+        'Anote o que sentiu: Desconforto? Poder? Alívio?',
         'Repita 3 vezes. O silêncio vai virar uma ferramenta, não um desconforto.',
       ],
     },
@@ -308,7 +308,7 @@ export const MODULES: Module[] = [
         heading: 'O ritual de liberação (5 minutos)',
         body: [
           'Aqui está o ritual que abre a represa. Faça 1 vez ao dia, preferencialmente à noite, por 14 dias.',
-          'Passo 1 (1 min): Fique de pé. Respire fundo 3 vezes. Tensione todo o corpo por 5 segundos — maximum tensão — e solte de uma vez. Repita 3 vezes. Isso "quebra" o padrão de tensão crônica.',
+          'Passo 1 (1 min): Fique de pé. Respire fundo 3 vezes. Tensione todo o corpo por 5 segundos — máxima tensão — e solte de uma vez. Repita 3 vezes. Isso "quebra" o padrão de tensão crônica.',
           'Passo 2 (2 min): Massageie a mandíbula com os dedos, em movimentos circulares, por 30 segundos. Respire fundo no diafragma (mão no abdômen, sinta subir e descer) por 60 segundos. Alongue o quadril por 30 segundos.',
           'Passo 3 (2 min): Fique parado, olhos fechados. Visualize a energia que estava represada subindo da base do tronco até o topo da cabeça, como uma corrente. Não force — apenas sinta. Permaneça 2 minutos. Abra os olhos. Você vai notar: algo mudou. A aura está mais presente.',
         ],
@@ -377,9 +377,9 @@ export const BONUSES: Bonus[] = [
       {
         heading: 'O timing do soltar',
         body: [
-          'O segredo do olhar magnético não está em segurar — está em como solta. O homem comum, quando decide desviar, desvia rápido. Isso comunica desconforto. O homem magnético solta devagar.',
+          'O segredo do olhar magnético não está em segurar — está em como soltar. O homem comum, quando decide desviar, desvia rápido. Isso comunica desconforto. O homem magnético solta devagar.',
           'A sequência: olhar encontra → segure 1 a 2 segundos → comece a virar a cabeça devagar → os olhos seguem por último, soltando o contato apenas no final do movimento. Esse "solte devagar" é o que provoca o frio na espinha. A pessoa sente que você não queria ir — mesmo que tenha ido.',
-          'Pratique sozinho: olhe para um objeto, segure, e vire devagar. Treine o movimento. Quando aplicar em pessoa, vai ser automático. E a reação vai ser imediata.',
+          'Pratique sozinho: olhe para um objeto, segure, e vire devagar. Treine o movimento. Quando aplicar em pessoas, vai ser automático. E a reação vai ser imediata.',
         ],
       },
     ],
@@ -411,14 +411,14 @@ export const BONUSES: Bonus[] = [
         heading: 'Por que antes de dormir funciona',
         body: [
           'O período entre a vigília e o sono — chamado estado hipnagógico — é quando o cérebro está mais receptivo a sugestão. As defesas do ego estão baixas. O crítico interno está adormecendo. O que você instala nesse momento entra fundo.',
-          'É por isso que as pessoas que assistem conteúdo negativo antes de dormir têm pior qualidade de sono e mais ansiedade. E por que as que fazem o oposto — instalam estados positivos — acordam diferentes. O áudio usa essa janela.',
+          'É por isso que as pessoas que assistem conteúdo negativo antes de dormir têm pior qualidade de sono e mais ansiedade. E por isso as que fazem o oposto — instalam estados positivos — acordam diferentes. O áudio usa essa janela.',
           'Não é subliminar. Não é mágica. É neurociência aplicada. Você escuta uma sequência de instruções calmas, respiratórias e de visualização que levam o sistema nervoso a um estado de presença profunda — e esse estado se "grava" no subconsciente enquanto você dorme.',
         ],
       },
       {
         heading: 'Como usar o áudio',
         body: [
-          'Deite-se de costas, em cama ou superfície confortável. Coloque fones. Feche os olhos. Pressione play. Não precisa prestar atenção consciente — o áudio foi feito para ser ouvido meio adormecido.',
+          'Deite-se de costas, na cama ou em uma superfície confortável. Coloque fones. Feche os olhos. Pressione play. Não precisa prestar atenção consciente — o áudio foi feito para ser ouvido meio adormecido.',
           'O áudio guia uma respiração lenta (4 segundos inspirando, 6 soltando) por 4 minutos, depois passa para visualizações da aura como uma luz dourada que cresce do centro do peito e se expande pelo corpo. Nos últimos 3 minutos, instruções silenciosas instalam a presença no subconsciente.',
           'Se você adormecer antes do fim, ótimo — o efeito é ainda mais forte. Se permanecer acordado, também funciona. O importante é escutar todos os dias por 21 dias. Depois, pode usar 3 vezes por semana para manutenção.',
         ],
@@ -470,7 +470,7 @@ export const BONUSES: Bonus[] = [
         body: [
           'Dimensão 1 — Física. Onde você se posiciona num ambiente importa mais do que o que diz. Não encoste na parede. Não fique no canto. Posicione-se no centro ou num ponto de passagem. Onde as pessoas precisam passar por você. O espaço físico que você ocupa comunica status antes de qualquer palavra.',
           'Dimensão 2 — Temporal. Não tenha pressa. O homem que se move devagar comunica que tem tempo — e ter tempo é luxo. O que se apressa comunica que está sendo cobrado por algo. Ande 20% mais devagar. Faça movimentos deliberados. A lentidão certa é poder.',
-          'Dimensão 3 — Visual. Onde seus olhos estão quando não estão em alguém. O homem com aura não olha para o celular. Não olha para o chão. Olha para o ambiente — com curiosidade calma, não com vigilância. Esse "olhar o ambiente" comunica: "eu pertenço aqui."',
+          'Dimensão 3 — Visual. Onde seus olhos estão quando não estão em alguém? O homem com aura não olha para o celular. Não olha para o chão. Olha para o ambiente — com curiosidade calma, não com vigilância. Esse "olhar o ambiente" comunica: "eu pertenço aqui."',
         ],
       },
       {
