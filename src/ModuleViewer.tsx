@@ -1,5 +1,6 @@
-import { Check, ArrowLeft, Clock, Target, ListChecks, Lightbulb, Sunrise, Move, Eye, Flame, VolumeX, Zap, Moon } from 'lucide-react';
+import { Check, ArrowLeft, Clock, Target, ListChecks, Lightbulb, Sunrise, Move, Eye, Flame, VolumeX, Zap, Moon, Sparkles } from 'lucide-react';
 import type { Module, Bonus } from './content';
+import type { OrderBump } from './orderBumps';
 import { AudioPlayer } from './AudioPlayer';
 
 const ICONS: Record<string, typeof Sunrise> = {
@@ -13,15 +14,17 @@ const ICONS: Record<string, typeof Sunrise> = {
 };
 
 type Props = {
-  item: Module | Bonus;
-  isBonus: boolean;
+  item: Module | Bonus | OrderBump;
+  isBonus?: boolean;
+  isOrderBump?: boolean;
   completed: boolean;
   onToggleComplete: () => void;
   onBack: () => void;
 };
 
-export function ModuleViewer({ item, isBonus, completed, onToggleComplete, onBack }: Props) {
+export function ModuleViewer({ item, isBonus, isOrderBump, completed, onToggleComplete, onBack }: Props) {
   const Icon = ICONS[item.icon] ?? Flame;
+  const showAudio = isBonus && (item as Bonus).audio;
 
   return (
     <div className="min-h-screen bg-ink-900 pb-20">
@@ -33,7 +36,8 @@ export function ModuleViewer({ item, isBonus, completed, onToggleComplete, onBac
           >
             <ArrowLeft className="h-4 w-4" /> Voltar
           </button>
-          <span className="text-xs font-semibold uppercase tracking-widest text-gold/70">
+          <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gold/70">
+            {isOrderBump && <Sparkles className="h-3 w-3" />}
             {item.number}
           </span>
         </div>
@@ -59,7 +63,7 @@ export function ModuleViewer({ item, isBonus, completed, onToggleComplete, onBac
           <div className="flex items-center gap-2">
             <Target className="h-4 w-4 shrink-0 text-gold" />
             <span className="text-xs font-semibold uppercase tracking-widest text-gold/70">
-              Objetivo deste módulo
+              {isOrderBump ? 'Objetivo deste conteúdo' : 'Objetivo deste módulo'}
             </span>
           </div>
           <p className="mt-2 text-sm leading-relaxed text-cream/80">{item.objective}</p>
@@ -113,21 +117,23 @@ export function ModuleViewer({ item, isBonus, completed, onToggleComplete, onBac
           </p>
         </div>
 
-        {isBonus && (item as Bonus).audio && <AudioPlayer />}
+        {showAudio && <AudioPlayer />}
 
-        <div className="mt-10">
-          <button
-            onClick={onToggleComplete}
-            className={`flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-center font-bold uppercase tracking-wide transition-all duration-300 ${
-              completed
-                ? 'border border-green-500/40 bg-green-500/10 text-green-400'
-                : 'bg-gradient-to-b from-[#e6c178] to-[#c8a35c] text-ink-900 shadow-[0_18px_50px_-12px_rgba(230,193,120,0.55)] hover:-translate-y-0.5'
-            }`}
-          >
-            <Check className="h-5 w-5" />
-            {completed ? 'Módulo concluído' : 'Marcar como concluído'}
-          </button>
-        </div>
+        {!isOrderBump && (
+          <div className="mt-10">
+            <button
+              onClick={onToggleComplete}
+              className={`flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-center font-bold uppercase tracking-wide transition-all duration-300 ${
+                completed
+                  ? 'border border-green-500/40 bg-green-500/10 text-green-400'
+                  : 'bg-gradient-to-b from-[#e6c178] to-[#c8a35c] text-ink-900 shadow-[0_18px_50px_-12px_rgba(230,193,120,0.55)] hover:-translate-y-0.5'
+              }`}
+            >
+              <Check className="h-5 w-5" />
+              {completed ? 'Módulo concluído' : 'Marcar como concluído'}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
