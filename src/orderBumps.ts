@@ -30,7 +30,7 @@ export const ORDER_BUMPS: OrderBump[] = [
     icon: 'eye',
     objective:
       'Entregar exatamente o que dizer nos primeiros 5 segundos após o olhar dela — transformando o "olhar dela" em "ela vir até você".',
-    checkoutUrl: 'https://pay.kiwify.com.br/checkout-placeholder-ob1',
+    checkoutUrl: 'https://pay.cakto.com.br/4sq7ykd',
     lessons: [
       {
         heading: 'A janela dos 5 segundos',
