@@ -25,7 +25,7 @@ export const ORDER_BUMPS: OrderBump[] = [
     key: 'ob1',
     number: 'Order Bump #1',
     title: 'Os 10 Gatilhos da Aura Magnética',
-    subtitle: 'O que falar quando ela olhar. Os primeiros 5 segundos decidem se o olhar vira aproximação — ou morre.',
+    subtitle: 'A aura predadora faz elas olharem. Mas quando ela olhar, você precisa saber exatamente o que fazer nos primeiros 5 segundos — ou o olhar esfria e a oportunidade morre. Este bolso de 10 gatilhos verbais te entrega o que falar, como olhar de volta, e como transformar o "olhar dela" em "ela vir até você".',
     duration: '22 min',
     icon: 'eye',
     objective:
@@ -140,7 +140,7 @@ export const ORDER_BUMPS: OrderBump[] = [
     key: 'ob2',
     number: 'Order Bump #2',
     title: 'Protocolo Noite de Predador',
-    subtitle: 'O guia da balada e do encontro. O mapa completo da noite: entrar, se posicionar, ser notado, e não cometer o erro que apaga a aura às 23h.',
+    subtitle: 'A aura funciona em qualquer lugar — mas a balada, o bar e o encontro têm regras próprias. Este protocolo te entrega o mapa completo da noite: como entrar, onde se posicionar, como fazer a primeira mulher te notar em 2 minutos, e o erro que 90% dos homens cometem às 23h que apaga a aura até o fim da noite. O cara com aura na balada não depende de beber, de amigo, nem de sorte. Ele entra e o ambiente reage.',
     duration: '28 min',
     icon: 'moon',
     objective:
