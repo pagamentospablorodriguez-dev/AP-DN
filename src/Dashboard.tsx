@@ -125,7 +125,7 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
               <p className="font-serif text-lg font-bold leading-none text-cream">
                 O Código da <span className="gold-text">Aura Predadora</span>
               </p>
-              <p className="mt-0.5 text-xs text-cream/40">Área de Membro</p>
+              <p className="mt-0.5 text-xs text-cream/40">Área de Membros</p>
             </div>
           </div>
           <button
