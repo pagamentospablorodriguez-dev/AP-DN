@@ -1,3 +1,6 @@
+//Bune
+
+
 import { useState } from 'react';
 import { ArrowRight, Lock, Mail, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { useAuth } from './auth';
@@ -60,7 +63,7 @@ export function AuthPage({ pendingUnlock }: Props) {
             <img src="/Bune.png" alt="Bune - The Best!" style={{ borderRadius: '10px' }} />
           </div>
           <h1 className="font-serif text-3xl font-bold text-cream">
-            Aura <span className="gold-text">Predadora</span>
+            O Código da <span className="gold-text">Aura Predadora</span>
           </h1>
           <p className="mt-2 text-sm text-cream/50">
             {mode === 'signup' ? 'Crie sua conta e ative sua aura' : 'Acesse sua área de membro'}
