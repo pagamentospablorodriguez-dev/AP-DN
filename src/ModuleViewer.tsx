@@ -1,4 +1,4 @@
-import { Check, ArrowLeft, Clock, Target, ListChecks, Lightbulb, Sunrise, Move, Eye, Flame, VolumeX, Zap, Moon, Sparkles } from 'lucide-react';
+import { Check, ArrowLeft, Clock, Target, ListChecks, Lightbulb, Sunrise, Move, Eye, Flame, VolumeX, Zap, Moon, Sparkles, FileText, Download, Headphones } from 'lucide-react';
 import type { Module, Bonus } from './content';
 import type { OrderBump } from './orderBumps';
 import type { Upsell } from './upsells';
@@ -28,6 +28,9 @@ type Props = {
 export function ModuleViewer({ item, isBonus, isOrderBump, isUpsell, completed, onToggleComplete, onBack }: Props) {
   const Icon = ICONS[item.icon] ?? Flame;
   const showAudio = isBonus && (item as Bonus).audio;
+  const upsellItem = isUpsell ? (item as Upsell) : null;
+  const upsellAudios = upsellItem?.audios ?? [];
+  const upsellPdfs = upsellItem?.pdfs ?? [];
 
   const objectiveLabel = isOrderBump
     ? 'Objetivo deste conteúdo'
@@ -127,6 +130,50 @@ export function ModuleViewer({ item, isBonus, isOrderBump, isUpsell, completed, 
         </div>
 
         {showAudio && <AudioPlayer />}
+
+        {isUpsell && upsellAudios.length > 0 && (
+          <div className="mt-8 space-y-4">
+            <div className="flex items-center gap-2">
+              <Headphones className="h-5 w-5 text-gold" />
+              <h3 className="font-serif text-lg font-bold text-cream">Áudios</h3>
+            </div>
+            {upsellAudios.map((audio, i) => (
+              <AudioPlayer
+                key={i}
+                src={audio.src}
+                title={audio.title}
+                description={audio.description}
+              />
+            ))}
+          </div>
+        )}
+
+        {isUpsell && upsellPdfs.length > 0 && (
+          <div className="mt-8 space-y-4">
+            <div className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-gold" />
+              <h3 className="font-serif text-lg font-bold text-cream">Materiais em PDF</h3>
+            </div>
+            {upsellPdfs.map((pdf, i) => (
+              <a
+                key={i}
+                href={pdf.src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-gold/30 bg-gradient-to-br from-ink-800 to-ink-800/30 p-5 transition-all duration-300 hover:border-gold/60"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
+                  <FileText className="h-6 w-6 text-gold" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="font-serif text-base font-bold leading-tight text-cream">{pdf.title}</p>
+                  <p className="mt-0.5 text-xs text-cream/50">Clique para abrir e baixar</p>
+                </div>
+                <Download className="h-5 w-5 text-gold transition-transform group-hover:translate-y-0.5" />
+              </a>
+            ))}
+          </div>
+        )}
 
         {!isOrderBump && !isUpsell && (
           <div className="mt-10">
