@@ -22,9 +22,11 @@ import {
 } from 'lucide-react';
 import { MODULES, BONUSES, type Module, type Bonus } from './content';
 import { ORDER_BUMPS, type OrderBump } from './orderBumps';
+import { UPSELLS, type Upsell } from './upsells';
 import { useProgress } from './useProgress';
 import { useAuth } from './auth';
 import { useOrderBumps } from './useOrderBumps';
+import { useUpsells } from './useUpsells';
 import { ModuleViewer } from './ModuleViewer';
 
 const ICONS: Record<string, typeof Sunrise> = {
@@ -35,6 +37,7 @@ const ICONS: Record<string, typeof Sunrise> = {
   'volume-x': VolumeX,
   zap: Zap,
   moon: Moon,
+  sparkles: Sparkles,
 };
 
 type DashboardProps = {
@@ -44,17 +47,19 @@ type DashboardProps = {
 
 export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
   const { progress, toggleComplete } = useProgress();
-  const { unlocks, unlockBump } = useOrderBumps();
+  const { unlocks: obUnlocks, unlockBump } = useOrderBumps();
+  const { unlocks: upsellUnlocks, unlockUpsell } = useUpsells();
   const { user, signOut } = useAuth();
 
   const [activeItem, setActiveItem] = useState<
     | { item: Module | Bonus; isBonus: boolean }
     | { item: OrderBump; isOrderBump: true }
+    | { item: Upsell; isUpsell: true }
     | null
   >(null);
 
   const [unlockStatus, setUnlockStatus] = useState<{
-    bumpKey: string;
+    key: string;
     success: boolean;
     error?: string;
   } | null>(null);
@@ -62,15 +67,29 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
   // Process pending unlock when user is logged in
   useEffect(() => {
     if (pendingUnlock && user) {
-      unlockBump(pendingUnlock).then(({ error }) => {
-        if (error) {
-          setUnlockStatus({ bumpKey: pendingUnlock, success: false, error });
-        } else {
-          setUnlockStatus({ bumpKey: pendingUnlock, success: true });
-          onUnlockConsumed?.();
-        }
-        window.scrollTo(0, 0);
-      });
+      const isOrderBump = pendingUnlock.startsWith('ob');
+      const isUpsell = pendingUnlock.startsWith('u') || pendingUnlock.startsWith('d');
+      if (isOrderBump) {
+        unlockBump(pendingUnlock).then(({ error }) => {
+          if (error) {
+            setUnlockStatus({ key: pendingUnlock, success: false, error });
+          } else {
+            setUnlockStatus({ key: pendingUnlock, success: true });
+            onUnlockConsumed?.();
+          }
+          window.scrollTo(0, 0);
+        });
+      } else if (isUpsell) {
+        unlockUpsell(pendingUnlock).then(({ error }) => {
+          if (error) {
+            setUnlockStatus({ key: pendingUnlock, success: false, error });
+          } else {
+            setUnlockStatus({ key: pendingUnlock, success: true });
+            onUnlockConsumed?.();
+          }
+          window.scrollTo(0, 0);
+        });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingUnlock, user]);
@@ -86,6 +105,17 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
         <ModuleViewer
           item={activeItem.item}
           isOrderBump
+          completed={false}
+          onToggleComplete={() => {}}
+          onBack={() => setActiveItem(null)}
+        />
+      );
+    }
+    if ('isUpsell' in activeItem) {
+      return (
+        <ModuleViewer
+          item={activeItem.item}
+          isUpsell
           completed={false}
           onToggleComplete={() => {}}
           onBack={() => setActiveItem(null)}
@@ -112,6 +142,18 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
   const pct = Math.round((completedCount / totalCount) * 100);
 
   const firstName = user?.email?.split('@')[0] ?? 'guerreiro';
+
+  // Only show upsells that are unlocked
+  const visibleUpsells = UPSELLS.filter((u) => upsellUnlocks[u.key]);
+
+  // Find label for unlock status banner
+  const findUnlockLabel = (key: string): string => {
+    const ob = ORDER_BUMPS.find((b) => b.key === key);
+    if (ob) return ob.title;
+    const up = UPSELLS.find((u) => u.key === key);
+    if (up) return up.title;
+    return '';
+  };
 
   return (
     <div className="min-h-screen bg-ink-900">
@@ -167,9 +209,7 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
                   }`}
                 >
                   {unlockStatus.success
-                    ? `"${
-                        ORDER_BUMPS.find((b) => b.key === unlockStatus.bumpKey)?.title ?? ''
-                      }" agora está disponível na sua área abaixo. Role a página para acessar.`
+                    ? `"${findUnlockLabel(unlockStatus.key)}" agora está disponível na sua área abaixo. Role a página para acessar.`
                     : unlockStatus.error}
                 </p>
               </div>
@@ -331,7 +371,7 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
             <div className="grid gap-4 md:grid-cols-2">
               {ORDER_BUMPS.map((b) => {
                 const Icon = ICONS[b.icon] ?? Flame;
-                const isUnlocked = !!unlocks[b.key];
+                const isUnlocked = !!obUnlocks[b.key];
                 return (
                   <div
                     key={b.key}
@@ -395,6 +435,63 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
                       )}
                     </div>
                   </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {/* Upsells Section (only shows unlocked items) */}
+        {visibleUpsells.length > 0 && (
+          <>
+            <div className="mt-12 mb-6 flex items-center gap-3">
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+              <span className="flex items-center gap-1.5 font-serif text-sm italic text-gold/70">
+                <Zap className="h-3.5 w-3.5" /> Arsenal Predador
+              </span>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {visibleUpsells.map((u) => {
+                const Icon = ICONS[u.icon] ?? Flame;
+                return (
+                  <button
+                    key={u.key}
+                    onClick={() => setActiveItem({ item: u, isUpsell: true })}
+                    className="group relative overflow-hidden rounded-2xl border border-gold/40 bg-gradient-to-br from-ink-800 to-ink-800/30 p-6 text-left transition-all duration-300 hover:border-gold/60"
+                  >
+                    <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gold/5 blur-2xl" />
+                    <div className="relative flex items-start justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
+                          <Icon className="h-6 w-6 text-gold" />
+                        </div>
+                        <div>
+                          <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gold/60">
+                            <Zap className="h-3 w-3" /> {u.number}
+                          </span>
+                          <h3 className="mt-1 font-serif text-lg font-bold leading-tight text-cream">
+                            {u.title}
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-green-500/20 text-green-400">
+                        <Check className="h-4 w-4" />
+                      </div>
+                    </div>
+                    <p className="relative mt-3 text-sm leading-relaxed text-cream/55">
+                      {u.subtitle}
+                    </p>
+                    <div className="relative mt-4 flex items-center justify-between">
+                      <span className="flex items-center gap-1.5 text-xs text-cream/40">
+                        <Clock className="h-3 w-3" /> {u.duration}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs font-semibold text-gold transition-transform group-hover:translate-x-1">
+                        Acessar <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </button>
                 );
               })}
             </div>
