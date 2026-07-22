@@ -3,6 +3,17 @@ export type UpsellLesson = {
   body: string[];
 };
 
+export type UpsellAudio = {
+  src: string;
+  title: string;
+  description?: string;
+};
+
+export type UpsellPdf = {
+  src: string;
+  title: string;
+};
+
 export type Upsell = {
   key: string;
   number: string;
@@ -17,6 +28,8 @@ export type Upsell = {
     steps: string[];
   };
   takeaway: string;
+  audios?: UpsellAudio[];
+  pdfs?: UpsellPdf[];
 };
 
 export const UPSELLS: Upsell[] = [
@@ -80,6 +93,11 @@ export const UPSELLS: Upsell[] = [
     },
     takeaway:
       'O protocolo é o mapa. O mantra é o combustível. Sem o combustível, o mapa só serve para olhar. Com ele, você chega.',
+    audios: [
+      { src: '/audios/u1-sacral-principal.mp3', title: 'Áudio Principal — OM KROOM LINGAYA OM (9 min)', description: 'O mantra ancestral em frequência específica que ativa o chakra sacral. Escute com fones de ouvido durante o dia.' },
+      { src: '/audios/u1-sacral-noturna.mp3', title: 'Bônus 1 — Versão Noturna (11 min)', description: 'A mesma frequência, calibrada para escutar antes de dormir. Ancora a energia durante o sono.' },
+      { src: '/audios/u1-campo-energetico.mp3', title: 'Bônus 2 — Campo Energético (5 min)', description: 'Versão curta para escutar antes de entrar em qualquer ambiente. Cria o campo magnético instantâneo.' },
+    ],
   },
   {
     key: 'd1',
@@ -123,6 +141,9 @@ export const UPSELLS: Upsell[] = [
     },
     takeaway:
       'Menos bônus, mesmo fogo. O essencial já acorda o sacral — o resto é aceleração.',
+    audios: [
+      { src: '/audios/d1-sacral-essencial.mp3', title: 'Áudio Essencial — OM KROOM LINGAYA OM (9 min)', description: 'O mantra ancestral em frequência específica que ativa o chakra sacral. Escute com fones de ouvido, 9 minutos por dia.' },
+    ],
   },
   {
     key: 'u2',
@@ -186,6 +207,13 @@ export const UPSELLS: Upsell[] = [
     },
     takeaway:
       'O sacral é a vela. Asmodeus é o incêndio. São níveis diferentes. Se você quer o máximo, é este.',
+    audios: [
+      { src: '/audios/u2-asmodeus-principal.mp3', title: 'Áudio Principal — O Chamado de Asmodeus (7 min)', description: 'O mantra de invocação da energia de Asmodeus. Explosão da energia sexual predadora. Use com fones, 1 vez ao dia.' },
+      { src: '/audios/u2-selo-asmodeus.mp3', title: 'Bônus 1 — Selo de Asmodeus (21 min)', description: 'Versão estendida para sessões profundas. Escute antes de um evento ou encontro para carregar o campo por horas.' },
+    ],
+    pdfs: [
+      { src: '/pdfs/u2-livro-asmodeus.pdf', title: 'Bônus 2 — O Livro de Asmodeus (Ritual de 3 dias)' },
+    ],
   },
   {
     key: 'd2',
@@ -229,6 +257,9 @@ export const UPSELLS: Upsell[] = [
     },
     takeaway:
       'Sem os complementos, sem o preço cheio. Mas com o nuclear — e o nuclear já é o incêndio.',
+    audios: [
+      { src: '/audios/d2-asmodeus-unico.mp3', title: 'O Chamado de Asmodeus — Versão Única (7 min)', description: 'O mantra de invocação da energia de Asmodeus. Use com fones, 1 vez ao dia, por 3 dias seguidos.' },
+    ],
   },
   {
     key: 'u3',
@@ -291,6 +322,18 @@ export const UPSELLS: Upsell[] = [
     },
     takeaway:
       'O homem que tem o arsenal não precisa escolher. Ele carrega tudo. E quem carrega tudo não caça — é o ímã.',
+    audios: [
+      { src: '/audios/u3-sacral-principal.mp3', title: 'OM KROOM LINGAYA OM — Sacral (9 min)', description: 'O mantra ancestral que ativa o chakra sacral. Escute pela manhã com fones.' },
+      { src: '/audios/u3-sacral-noturna.mp3', title: 'Sacral — Versão Noturna (11 min)', description: 'Calibrada para escutar antes de dormir. Ancora a energia durante o sono.' },
+      { src: '/audios/u3-campo-energetico.mp3', title: 'Campo Energético (5 min)', description: 'Versão curta para escutar antes de entrar em qualquer ambiente.' },
+      { src: '/audios/u3-asmodeus-principal.mp3', title: 'O Chamado de Asmodeus (7 min)', description: 'O mantra de invocação da energia de Asmodeus. Use 1 vez ao dia, por 3 dias.' },
+      { src: '/audios/u3-selo-asmodeus.mp3', title: 'Selo de Asmodeus (21 min)', description: 'Versão estendida para carregar o campo por horas. Antes de eventos noturnos.' },
+      { src: '/audios/u3-dominancia-silenciosa.mp3', title: 'BÔNUS EXCLUSIVO — Mantra da Dominância Silenciosa (8 min)', description: 'Áudio que ativa a presença de quem comanda um ambiente sem falar nada. Exclusivo do bundle.' },
+    ],
+    pdfs: [
+      { src: '/pdfs/u3-livro-asmodeus.pdf', title: 'O Livro de Asmodeus (Ritual de 3 dias)' },
+      { src: '/pdfs/u3-ritual-7-dias.pdf', title: 'BÔNUS EXCLUSIVO — Ritual de 7 Dias para a Aura Magnética' },
+    ],
   },
   {
     key: 'd3',
@@ -343,5 +386,10 @@ export const UPSELLS: Upsell[] = [
     },
     takeaway:
       'Sem os extras, sem o preço cheio. Mas com os 3 mantras — e os 3 mantras já são o arsenal.',
+    audios: [
+      { src: '/audios/d3-sacral.mp3', title: 'OM KROOM LINGAYA OM — Sacral (9 min)', description: 'Acorda o fogo que dorme na base da coluna. O centro da energia masculina.' },
+      { src: '/audios/d3-asmodeus.mp3', title: 'O Chamado de Asmodeus (7 min)', description: 'Explode a energia sexual predadora. O nuclear, o nível acima do sacral.' },
+      { src: '/audios/d3-dominancia-silenciosa.mp3', title: 'Mantra da Dominância Silenciosa (8 min)', description: 'Ativa a presença de quem comanda um ambiente sem falar nada. O que sustenta o sistema.' },
+    ],
   },
 ];
