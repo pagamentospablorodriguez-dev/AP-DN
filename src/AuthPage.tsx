@@ -4,9 +4,22 @@
 import { useState } from 'react';
 import { ArrowRight, Lock, Mail, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { useAuth } from './auth';
+import { ORDER_BUMPS } from './orderBumps';
+import { UPSELLS } from './upsells';
 
 type Props = {
   pendingUnlock?: string | null;
+};
+
+const UNLOCK_LABELS: Record<string, string> = {
+  ob1: ORDER_BUMPS.find((b) => b.key === 'ob1')?.title ?? '',
+  ob2: ORDER_BUMPS.find((b) => b.key === 'ob2')?.title ?? '',
+  u1: UPSELLS.find((u) => u.key === 'u1')?.title ?? '',
+  d1: UPSELLS.find((u) => u.key === 'd1')?.title ?? '',
+  u2: UPSELLS.find((u) => u.key === 'u2')?.title ?? '',
+  d2: UPSELLS.find((u) => u.key === 'd2')?.title ?? '',
+  u3: UPSELLS.find((u) => u.key === 'u3')?.title ?? '',
+  d3: UPSELLS.find((u) => u.key === 'd3')?.title ?? '',
 };
 
 export function AuthPage({ pendingUnlock }: Props) {
@@ -28,12 +41,7 @@ export function AuthPage({ pendingUnlock }: Props) {
     if (error) setError(error);
   };
 
-  const unlockLabel =
-    pendingUnlock === 'ob1'
-      ? 'Os 10 Gatilhos da Aura Magnética'
-      : pendingUnlock === 'ob2'
-        ? 'Protocolo Noite de Predador'
-        : null;
+  const unlockLabel = pendingUnlock ? UNLOCK_LABELS[pendingUnlock] ?? null : null;
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-ink-900 px-5 py-10">
