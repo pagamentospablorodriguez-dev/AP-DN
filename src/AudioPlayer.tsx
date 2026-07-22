@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
-export function AudioPlayer() {
+type Props = {
+  src?: string;
+  title?: string;
+  description?: string;
+};
+
+export function AudioPlayer({ src = '/Bune.MP3', title = 'Áudio de Ativação Noturna', description }: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
@@ -26,7 +32,7 @@ export function AudioPlayer() {
       audio.removeEventListener('loadedmetadata', onTime);
       audio.removeEventListener('ended', onEnd);
     };
-  }, []);
+  }, [src]);
 
   const toggle = () => {
     const audio = audioRef.current;
@@ -65,11 +71,8 @@ export function AudioPlayer() {
 
   return (
     <div className="rounded-2xl border border-gold/30 bg-ink-900/80 p-6">
-      <audio ref={audioRef} loop preload="auto">
-        <source
-          src="/Bune.MP3"
-          type="audio/mpeg"
-        />
+      <audio ref={audioRef} loop preload="auto" key={src}>
+        <source src={src} type="audio/mpeg" />
       </audio>
 
       <div className="flex items-center gap-4">
@@ -82,7 +85,7 @@ export function AudioPlayer() {
 
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex items-center justify-between text-xs text-cream/50">
-            <span>Áudio de Ativação Noturna</span>
+            <span>{title}</span>
             <span>
               {fmt(progress)} / {fmt(duration)}
             </span>
@@ -107,8 +110,7 @@ export function AudioPlayer() {
       </div>
 
       <p className="mt-4 text-xs leading-relaxed text-cream/40">
-        Deite-se de costas, feche os olhos e pressione play. Respire junto com o áudio.
-        Se adormecer, melhor — o efeito atua no subconsciente.
+        {description ?? 'Deite-se de costas, feche os olhos e pressione play. Respire junto com o áudio. Se adormecer, melhor — o efeito atua no subconsciente.'}
       </p>
     </div>
   );
