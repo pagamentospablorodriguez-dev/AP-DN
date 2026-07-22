@@ -1,6 +1,7 @@
 import { Check, ArrowLeft, Clock, Target, ListChecks, Lightbulb, Sunrise, Move, Eye, Flame, VolumeX, Zap, Moon, Sparkles } from 'lucide-react';
 import type { Module, Bonus } from './content';
 import type { OrderBump } from './orderBumps';
+import type { Upsell } from './upsells';
 import { AudioPlayer } from './AudioPlayer';
 
 const ICONS: Record<string, typeof Sunrise> = {
@@ -11,20 +12,28 @@ const ICONS: Record<string, typeof Sunrise> = {
   'volume-x': VolumeX,
   zap: Zap,
   moon: Moon,
+  sparkles: Sparkles,
 };
 
 type Props = {
-  item: Module | Bonus | OrderBump;
+  item: Module | Bonus | OrderBump | Upsell;
   isBonus?: boolean;
   isOrderBump?: boolean;
+  isUpsell?: boolean;
   completed: boolean;
   onToggleComplete: () => void;
   onBack: () => void;
 };
 
-export function ModuleViewer({ item, isBonus, isOrderBump, completed, onToggleComplete, onBack }: Props) {
+export function ModuleViewer({ item, isBonus, isOrderBump, isUpsell, completed, onToggleComplete, onBack }: Props) {
   const Icon = ICONS[item.icon] ?? Flame;
   const showAudio = isBonus && (item as Bonus).audio;
+
+  const objectiveLabel = isOrderBump
+    ? 'Objetivo deste conteúdo'
+    : isUpsell
+      ? 'Objetivo deste conteúdo'
+      : 'Objetivo deste módulo';
 
   return (
     <div className="min-h-screen bg-ink-900 pb-20">
@@ -37,7 +46,7 @@ export function ModuleViewer({ item, isBonus, isOrderBump, completed, onToggleCo
             <ArrowLeft className="h-4 w-4" /> Voltar
           </button>
           <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gold/70">
-            {isOrderBump && <Sparkles className="h-3 w-3" />}
+            {(isOrderBump || isUpsell) && <Sparkles className="h-3 w-3" />}
             {item.number}
           </span>
         </div>
@@ -63,7 +72,7 @@ export function ModuleViewer({ item, isBonus, isOrderBump, completed, onToggleCo
           <div className="flex items-center gap-2">
             <Target className="h-4 w-4 shrink-0 text-gold" />
             <span className="text-xs font-semibold uppercase tracking-widest text-gold/70">
-              {isOrderBump ? 'Objetivo deste conteúdo' : 'Objetivo deste módulo'}
+              {objectiveLabel}
             </span>
           </div>
           <p className="mt-2 text-sm leading-relaxed text-cream/80">{item.objective}</p>
@@ -119,7 +128,7 @@ export function ModuleViewer({ item, isBonus, isOrderBump, completed, onToggleCo
 
         {showAudio && <AudioPlayer />}
 
-        {!isOrderBump && (
+        {!isOrderBump && !isUpsell && (
           <div className="mt-10">
             <button
               onClick={onToggleComplete}
