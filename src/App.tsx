@@ -8,10 +8,12 @@ import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'aura_pending_unlock';
 
+const VALID_UNLOCK_KEYS = ['ob1', 'ob2', 'u1', 'd1', 'u2', 'd2', 'u3', 'd3'];
+
 function getUnlockFromURL(): string | null {
   const params = new URLSearchParams(window.location.search);
   const unlock = params.get('unlock');
-  if (unlock === 'ob1' || unlock === 'ob2') return unlock;
+  if (unlock && VALID_UNLOCK_KEYS.includes(unlock)) return unlock;
   return null;
 }
 
