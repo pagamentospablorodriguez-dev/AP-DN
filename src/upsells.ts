@@ -104,7 +104,7 @@ export const UPSELLS: Upsell[] = [
     number: 'Downsell #1',
     title: 'Áudio de Ativação Sacral — Versão Essencial',
     subtitle:
-      'O áudio principal de 9 minutos, sem os bônus. Mesma frequência ancestral OM KROOM LINGAYA OM que ativa o chakra sacral — por menos da metade do preço.',
+      'O áudio principal de 9 minutos, sem os bônus. Mesma frequência ancestral OM KROOM LINGAYA OM que ativa o chakra sacral.',
     duration: '9 min',
     icon: 'flame',
     objective:
