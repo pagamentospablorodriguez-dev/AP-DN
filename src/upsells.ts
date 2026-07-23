@@ -272,14 +272,7 @@ export const UPSELLS: Upsell[] = [
     objective:
       'Integrar os 3 mantras em um sistema completo que cria uma presença que nenhum deles gera sozinho — o sacral acende, Asmodeus explode, a dominância silenciosa sustenta.',
     lessons: [
-      {
-        heading: 'A matemática do arsenal',
-        body: [
-          'Se você comprasse cada mantra separado — o sacral, o Asmodeus, e todos os bônus — você pagaria R$ 891. É a soma real de tudo, sem desconto.',
-          'Aqui, nesta única tela, você leva tudo junto por R$ 197. Você economiza R$ 694 — e ainda ganha 2 bônus que não existem fora daqui: o Mantra da Dominância Silenciosa e o Ritual de 7 Dias para a Aura Magnética.',
-          'Este bundle não existe fora desta tela. Se você sair, ele some. Não estará à venda em nenhuma página do produto. É a última chance de pegar tudo, com desconto, e com os exclusivos.',
-        ],
-      },
+      
       {
         heading: 'O que vem no arsenal',
         body: [
