@@ -121,7 +121,7 @@ export const UPSELLS: Upsell[] = [
       {
         heading: 'Como usar a versão essencial',
         body: [
-          'Use fones de ouvido. A frequência atua por vibração direta no canal auditivo.',
+          
           'Escute 9 minutos toda manhã, ou antes de sair de casa.',
           'Se quiser intensificar, escute novamente à tarde.',
           'Os primeiros efeitos aparecem em 3 a 4 dias. O efeito pleno em 7 a 14 dias.',
