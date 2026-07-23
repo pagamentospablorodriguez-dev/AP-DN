@@ -72,7 +72,7 @@ export const UPSELLS: Upsell[] = [
       {
         heading: 'Como usar',
         body: [
-          'Use fones de ouvido. A frequência atua por vibração direta no canal auditivo — alto-falantes dispersam a energia.',
+          
           'Áudio principal: 9 minutos pela manhã ou antes de sair de casa. Repita se quiser intensificar.',
           'Versão noturna: 11 minutos antes de dormir. Deite-se de costas, feche os olhos, deixe o som te levar.',
           'Campo energético: 5 minutos antes de entrar em qualquer ambiente social. É o gatilho instantâneo.',
