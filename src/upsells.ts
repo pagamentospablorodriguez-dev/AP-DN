@@ -288,7 +288,7 @@ export const UPSELLS: Upsell[] = [
           'Efeito sistema, não pico: os 3 mantras combinados criam uma presença que nenhum deles gera sozinho. O sacral acende, Asmodeus explode, a dominância silenciosa sustenta.',
           'O ritual de 7 dias muda tudo: sem ele, a energia vai e volta. Com ele, fica. É o guia que integra os 3 mantras em uma sequência que sustenta o resultado.',
           '2 bônus que não existem fora: o Mantra da Dominância Silenciosa e o Ritual de 7 Dias não são vendidos separados em nenhuma tela. Só aqui.',
-          'Economia de R$ 694: comprar separado custa R$ 891. Aqui, R$ 197. É menos da terça parte — e você leva mais.',
+          
         ],
       },
       {
