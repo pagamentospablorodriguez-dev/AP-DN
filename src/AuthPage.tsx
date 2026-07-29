@@ -7,6 +7,11 @@ import { useAuth } from './auth';
 import { ORDER_BUMPS } from './orderBumps';
 import { UPSELLS } from './upsells';
 
+import { UPSELLS_EXTRA } from './upsellers';
+
+const ALL_UPSELLS = [...UPSELLS, ...UPSELLS_EXTRA];
+
+
 type Props = {
   pendingUnlock?: string | null;
 };
@@ -14,13 +19,18 @@ type Props = {
 const UNLOCK_LABELS: Record<string, string> = {
   ob1: ORDER_BUMPS.find((b) => b.key === 'ob1')?.title ?? '',
   ob2: ORDER_BUMPS.find((b) => b.key === 'ob2')?.title ?? '',
-  u1: UPSELLS.find((u) => u.key === 'u1')?.title ?? '',
-  d1: UPSELLS.find((u) => u.key === 'd1')?.title ?? '',
-  u2: UPSELLS.find((u) => u.key === 'u2')?.title ?? '',
-  d2: UPSELLS.find((u) => u.key === 'd2')?.title ?? '',
-  u3: UPSELLS.find((u) => u.key === 'u3')?.title ?? '',
-  d3: UPSELLS.find((u) => u.key === 'd3')?.title ?? '',
+  u1: ALL_UPSELLS.find((u) => u.key === 'u1')?.title ?? '',
+  d1: ALL_UPSELLS.find((u) => u.key === 'd1')?.title ?? '',
+  u2: ALL_UPSELLS.find((u) => u.key === 'u2')?.title ?? '',
+  d2: ALL_UPSELLS.find((u) => u.key === 'd2')?.title ?? '',
+  u3: ALL_UPSELLS.find((u) => u.key === 'u3')?.title ?? '',
+  d3: ALL_UPSELLS.find((u) => u.key === 'd3')?.title ?? '',
+  u4: ALL_UPSELLS.find((u) => u.key === 'u4')?.title ?? '',
+  d4: ALL_UPSELLS.find((u) => u.key === 'd4')?.title ?? '',
+  u5: ALL_UPSELLS.find((u) => u.key === 'u5')?.title ?? '',
+  d5: ALL_UPSELLS.find((u) => u.key === 'd5')?.title ?? '',
 };
+
 
 export function AuthPage({ pendingUnlock }: Props) {
   const { signIn, signUp } = useAuth();
