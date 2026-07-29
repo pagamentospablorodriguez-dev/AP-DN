@@ -28,6 +28,11 @@ import { useAuth } from './auth';
 import { useOrderBumps } from './useOrderBumps';
 import { useUpsells } from './useUpsells';
 import { ModuleViewer } from './ModuleViewer';
+import { UPSELLS_EXTRA } from './upsellers';
+
+
+const ALL_UPSELLS: Upsell[] = [...UPSELLS, ...UPSELLS_EXTRA];
+
 
 const ICONS: Record<string, typeof Sunrise> = {
   sunrise: Sunrise,
@@ -144,13 +149,15 @@ export function Dashboard({ pendingUnlock, onUnlockConsumed }: DashboardProps) {
   const firstName = user?.email?.split('@')[0] ?? 'guerreiro';
 
   // Only show upsells that are unlocked
-  const visibleUpsells = UPSELLS.filter((u) => upsellUnlocks[u.key]);
+    const visibleUpsells = ALL_UPSELLS.filter((u) => upsellUnlocks[u.key]);
+
 
   // Find label for unlock status banner
   const findUnlockLabel = (key: string): string => {
     const ob = ORDER_BUMPS.find((b) => b.key === key);
     if (ob) return ob.title;
-    const up = UPSELLS.find((u) => u.key === key);
+       const up = ALL_UPSELLS.find((u) => u.key === key);
+
     if (up) return up.title;
     return '';
   };
