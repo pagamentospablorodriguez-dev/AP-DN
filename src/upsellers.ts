@@ -16,7 +16,7 @@ export const UPSELLS_EXTRA: Upsell[] = [
   // ============================================================
   {
     key: 'u4',
-    number: 'Upsell #4',
+    number: 'Upsell #1',
     title: 'O Mapa da Caçada — Os 7 Passos do Olhar Até a Cama',
     subtitle:
       'A aura faz ela olhar. Mas olhar não bota ninguém na cama. Este é o passo a passo exato que leva do instante em que ela te olha até o instante em que a porta do quarto fecha. O que falar, como olhar de volta, como aproximar sem assustar, como arrancar ela do grupo, como beijar sem risco de rejeição, como conduzir até a cama. Cada passo. Sem buracos. Sem teoria. Só execução.',
@@ -134,7 +134,7 @@ export const UPSELLS_EXTRA: Upsell[] = [
   // ============================================================
   {
     key: 'd4',
-    number: 'Downsell #4',
+    number: 'Downsell #1',
     title: 'O Mapa da Caçada — Versão Essencial',
     subtitle:
       'O protocolo completo dos 7 passos que levam do instante em que ela te olha até o instante em que a porta do quarto fecha. O que falar, como olhar de volta, como aproximar sem assustar, como arrancar ela do grupo, como beijar sem risco de rejeição, como conduzir até a cama. Cada passo em detalhe. Sem buracos. Sem teoria. Só execução.',
@@ -252,7 +252,7 @@ export const UPSELLS_EXTRA: Upsell[] = [
   // ============================================================
   {
     key: 'u5',
-    number: 'Upsell #5',
+    number: 'Upsell #2',
     title: 'O Protocolo da Dominação — O Manual da Hora H',
     subtitle:
       'A aura faz ela olhar. O mapa faz ela ir pra cama. Mas o que acontece na cama decide se ela volta — ou se te esquece. O guia completo de como ser absolutamente excepcional na cama: controle total para durar o tempo que quiser, técnicas que geram orgasmos em minutos, o mapa do corpo feminino que 97% dos homens desconhecem. Como sair de "ok" pra "inesquecível".',
@@ -342,7 +342,7 @@ export const UPSELLS_EXTRA: Upsell[] = [
   // ============================================================
   {
     key: 'd5',
-    number: 'Downsell #5',
+    number: 'Downsell #2',
     title: 'O Protocolo da Dominação — Versão Essencial',
     subtitle:
       'O guia completo de como ser absolutamente excepcional na cama: controle total para durar o tempo que quiser, técnicas que geram orgasmos em minutos, o mapa do corpo feminino que 97% dos homens desconhecem. Como sair de "ok" pra "inesquecível". O protocolo principal da Hora H, em detalhe.',
